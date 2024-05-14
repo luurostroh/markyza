@@ -1,4 +1,5 @@
 #include <Arduino.h>
+ #define Vmin 45
 //vystupy pwm
 #define pwmM1 9
 #define pwmM2 10
@@ -64,10 +65,10 @@ void loop()
     //precti hodnoty potenciometru
     //nastavovat se bude 50 - 100% duty cycle (hodnota 127 - 255)
     analog_val = analogRead(regM1);
-    speed_M1 = 45 + (analog_val/20);//cca 3,3 - 8 V pri 12V zdroji
+    speed_M1 = Vmin + (analog_val/20);//cca 3,3 - 8 V pri 12V zdroji
     Serial.print("speed 1  = ");Serial.println(speed_M1);
     analog_val = smer==1?  analogRead(regM2_3fwd) : analogRead(regM2_3bck);
-    speed_M2_3 = 45 + (analog_val/20); //cca 3,3 - 8 V pri 12V zdroji
+    speed_M2_3 = Vmin + (analog_val/20); //cca 3,3 - 8 V pri 12V zdroji
     Serial.print("speed 2  = ");Serial.println(speed_M2_3);
     //nastav 
     analogWrite(pwmM1,speed_M1);   
@@ -96,7 +97,7 @@ void loop()
     digitalWrite(smer_1,1); 
     digitalWrite(smer_2,0);
     analog_val = analogRead(regM2_3fwd);
-    speed_M2_3 = 45+ (analog_val/20); //cca 3,3 - 8 V pri 12V zdroji
+    speed_M2_3 = Vmin + (analog_val/20); //cca 3,3 - 8 V pri 12V zdroji
     if(!digitalRead(tl_napinani_1))analogWrite(pwmM2,speed_M2_3);  
     if(!digitalRead(tl_napinani_2))analogWrite(pwmM3,speed_M2_3); 
     //jed dokud je nektere tlacitko seple
