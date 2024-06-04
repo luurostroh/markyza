@@ -45,8 +45,6 @@ void setup()
 void loop() 
 {
 
-  //kontrola koncaku
- // while(digitalRead(koncakM2) || digitalRead(koncakM3));
   //vysunuti/zasunuti
   if(!digitalRead(tl_start))
   {
